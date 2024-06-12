@@ -45,6 +45,7 @@ class Payment extends PaymentMethod {
 
 	public function getMethod($checkoutInfo = [], $options = []) {
 		$this->method_data = $options + $this->method_data;
+		$this->method_data['cost'] = floatval($this->method_data['cost']);
 		//$this->getCost();
 
 		//if set only for specific region(s) check if address matches region
