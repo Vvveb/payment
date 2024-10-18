@@ -82,4 +82,8 @@ class Payment extends PaymentMethod {
 			$this->cart->addTotal($this->namespace, $this->method_data['title'] , $this->method_data['cost'], $this->method_data['text']);
 		}
 	}
+
+	public function authorize(&$checkoutInfo = []) {
+		return true;
+	}
 }

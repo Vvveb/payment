@@ -2,7 +2,7 @@ import(common.tpl)
 
 
 /* method tabs */
-.flat-rate-payment|before = <?php $index = 0;?>
+.settings|before = <?php $index = 0;?>
 @method = [data-v-methods] [data-v-method]
 @method|deleteAllButFirstChild
 
@@ -16,11 +16,13 @@ foreach ($this->methods as $index => $method) { ?>
 	@method [data-v-method-payment_method_id]|href = <?php echo "#tab-$index";?>
 	@method [data-v-method-payment_method_id]|addClass = <?php if ($index == 0) echo "active";?>
 	@method [data-v-method-name] = <?php $langa = current($method['lang'] ?? []);echo $langa['title'] ?: "Method  $index";?>
+/*	
+	
 	@method input.method|value = <?php
 		$_setting = '@@__name:\]\[([^\]]+)\]__@@';
 		echo $_POST['settings'][$_setting] ?? $method[$_setting] ?? '@@__value__@@';
 	?>
-
+*/
 	@method input.method|name = <?php
 		$name = '@@__name__@@';
 		echo str_replace('methods[0]',"methods[$index]", $name);
@@ -47,7 +49,7 @@ $count = 0;
 if(isset($this->payment_status) && is_array($this->payment_status)) {
 	foreach ($this->payment_status as $payment_status_index => $payment_status) {?>
 	
-	@payment_status|innerText = $payment_status
+	@payment_status|innerText = <?php echo htmlentities(Vvveb\humanReadable($payment_status));?>
 	@payment_status|value	  = $payment_status_index
 	@payment_status|addNewAttribute = <?php if (isset($method['payment_status_id']) && $payment_status_index == $method['payment_status_id']) echo 'selected';?>
 	
