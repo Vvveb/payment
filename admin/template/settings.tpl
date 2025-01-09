@@ -15,12 +15,12 @@ foreach ($this->methods as $index => $method) { ?>
 
 	@method [data-v-method-payment_method_id]|href = <?php echo "#tab-$index";?>
 	@method [data-v-method-payment_method_id]|addClass = <?php if ($index == 0) echo "active";?>
-	@method [data-v-method-name] = <?php $langa = current($method['lang'] ?? []);echo $langa['title'] ?: "Method  $index";?>
+	@method [data-v-method-name] = <?php $langa = current($method['lang'] ?? []);echo htmlspecialchars($langa['title'] ?: "Method  $index");?>
 /*	
 	
 	@method input.method|value = <?php
 		$_setting = '@@__name:\]\[([^\]]+)\]__@@';
-		echo $_POST['settings'][$_setting] ?? $method[$_setting] ?? '@@__value__@@';
+		echo htmlspecialchars($_POST['settings'][$_setting] ?? $method[$_setting] ?? '@@__value__@@');
 	?>
 */
 	@method input.method|name = <?php
@@ -49,7 +49,7 @@ $count = 0;
 if(isset($this->payment_status) && is_array($this->payment_status)) {
 	foreach ($this->payment_status as $payment_status_index => $payment_status) {?>
 	
-	@payment_status|innerText = <?php echo htmlentities(Vvveb\humanReadable($payment_status));?>
+	@payment_status|innerText = <?php echo htmlspecialchars(Vvveb\humanReadable($payment_status));?>
 	@payment_status|value	  = $payment_status_index
 	@payment_status|addNewAttribute = <?php if (isset($method['payment_status_id']) && $payment_status_index == $method['payment_status_id']) echo 'selected';?>
 	
@@ -80,7 +80,7 @@ foreach ($this->languagesList as $language) { ?>
 	@language [data-v-lang-*] = <?php 
 		$name = '@@__data-v-lang-(*)__@@';
 		//var_dump($method['lang'][0][$language['language_id']]);
-		echo $method['lang'][$language['language_id']][$name] ?? $_POST[$index][$language['language_id']][$name] ?? ''
+		echo htmlspecialchars($method['lang'][$language['language_id']][$name] ?? $_POST[$index][$language['language_id']][$name] ?? '');
 	?>
 
 	@language [data-v-lang-*]|name = <?php 
@@ -142,7 +142,7 @@ if(isset($this->order_status) && is_array($this->order_status)) {
 	foreach ($this->order_status as $order_status_index => $order_status) {?>
 	
 	
-	@order_status|innerText = <?php echo Vvveb\humanReadable($order_status);?>
+	@order_status|innerText = <?php echo htmlspecialchars(Vvveb\humanReadable($order_status));?>
 	@order_status|value     = $order_status_index
 	@order_status|addNewAttribute = <?php if (isset($method['order_status_id']) && $order_status_index == $method['order_status_id']) echo 'selected';?>
 	
