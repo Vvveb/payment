@@ -61,7 +61,7 @@ class Payment {
 				$method += $lang;
 			}
 
-			$name = slugify($lang['title']) ?? $this->namespace;
+			$name = slugify($lang['title'] ?? $this->namespace);
 			$payment->registerMethod($name, PaymentMethod::class, $method);
 		}
 	}

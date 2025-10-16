@@ -15,7 +15,7 @@ foreach ($this->methods as $index => $method) { ?>
 
 	@method [data-v-method-payment_method_id]|href = <?php echo "#tab-$index";?>
 	@method [data-v-method-payment_method_id]|addClass = <?php if ($index == 0) echo "active";?>
-	@method [data-v-method-name] = <?php $langa = current($method['lang'] ?? []);echo htmlspecialchars($langa['title'] ?: "Method  $index");?>
+	@method [data-v-method-name] = <?php $langa = current($method['lang'] ?? ['title']);echo htmlspecialchars($langa['title'] ?: "Method  $index");?>
 /*	
 	
 	@method input.method|value = <?php
