@@ -43,7 +43,7 @@ class Payment extends PaymentMethod {
 		'region_group_id' => 0,
 	];
 
-	public function getMethod($checkoutInfo = [], $options = []) {
+	public function getMethod(&$checkoutInfo = [], $options = []) {
 		$this->method_data         = $options + $this->method_data;
 		$this->method_data['cost'] = floatval($this->method_data['cost']);
 		//$this->getCost();
