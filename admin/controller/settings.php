@@ -80,6 +80,7 @@ class Settings extends Base {
 		$paymentStatus  = new Payment_StatusSQL();
 		$statuses       = $paymentStatus->getAll($this->global);
 
+		$payment_status_id = [];
 		foreach ($statuses['payment_status'] as $status) {
 			$payment_status_id[$status['payment_status_id']] = $status['name'];
 		}

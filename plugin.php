@@ -33,12 +33,12 @@ Author url: https://www.vvveb.com
 Settings: /admin/index.php?module=plugins/payment/settings
 */
 
-use function Vvveb\getLanguageId;
 use function Vvveb\getSetting;
 use Vvveb\Plugins\Payment\Payment as PaymentMethod;
 use function Vvveb\slugify;
 use Vvveb\System\Core\Request;
 use Vvveb\System\Event;
+use Vvveb\System\Locale;
 use Vvveb\System\Payment as PaymentApi;
 
 if (! defined('V_VERSION')) {
@@ -53,8 +53,8 @@ class Payment {
 
 		$payment = PaymentApi::getInstance();
 
-		foreach ($settings as $method) {
-			$lang = $method['lang'][getLanguageId()] ?? [];
+		foreach ($settings as $index => $method) {
+			$lang = $method['lang'][Locale :: getLanguageId()] ?? [];
 
 			if ($lang) {
 				unset($method['lang']);
